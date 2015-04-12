@@ -1,0 +1,17 @@
+{
+  "name": "backend_mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "memoHandler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "mime": "^1.3.4",
+    "mongodb": "^2.0.27"
+  }
+}
