@@ -3,7 +3,7 @@
 var mongodb = require('mongodb');
 
 var server = new mongodb.Server('localhost', 27017, {});
-var db = new mongodb.Db('mydatabase', server, {w: 1});
+var db = new mongodb.Db('ImFine', server, {w: 1});
 var querystring = require('querystring'); 
 var http = require('http'),
     url = require('url'),
@@ -64,18 +64,18 @@ exports.create = function(req, res, form){
     // })
     .on('end', function() {
 
-        var memo ={};
+        var card ={};
 
         for(var i in files){
             resultPaths.push(files[i][1].path);
         }
         for(var i in fields){
-            if(fields[i][0] == "author") memo.author = fields[i][1];
-            else if(fields[i][0] == "memo") memo.memo = fields[i][1];
+            if(fields[i][0] == "type") card.t = fields[i][1];
+            else if(fields[i][0] == "date") card.date = fields[i][1];
         }
 
-        memo.date = new Date();
-        memo.file = resultPaths;
+        card.date = new Date();
+        card.file = resultPaths;
 
 
         db.open(function(err) {
@@ -90,7 +90,7 @@ exports.create = function(req, res, form){
         // });
         db.open(function(err) {
             if (err) throw err;
-            db.collection('memo').insert(memo, function(err, inserted) {
+            db.collection('card').insert(card, function(err, inserted) {
                 if (err) throw err;
                 console.dir("successfully inserted: " + JSON.stringify(inserted));
                 db.close();
@@ -275,11 +275,13 @@ function _findMemo(where, callback) { 
         console.log("where " + where.toString());
                 
  
-        db.collection('memo').find(where).toArray(function (err,docs){
+        db.collection('card').find(where).toArray(function (err,docs){
              if (err) throw err;
         //.toArray등 
- 
+            
+            console.log("test");
             console.dir(docs);
+
             //console.log대신 console.dir을 쓴 이유는 문서이기 때문에
             //cursor대신 뭉텡이 ㅋㅋ로 보내는 것이 더 빠름 당연히.
  
@@ -300,7 +302,7 @@ function _updateMemo(where, body, callback) { 
     db.open(function(err) {
         if (err) throw err;
  
-        db.collection('memo').update(where, { $set: body }, {multi: true}, function(err, updated) {
+        db.collection('card').update(where, { $set: body }, {multi: true}, function(err, updated) {
 
             //multi: true는 해당하는 모든 것을 선택한다는 의미!
             if (err) throw err;
@@ -325,7 +327,7 @@ function _removeMemo(where, callback) { 
     db.open(function(err) {
         if (err) throw err;
  
-        db.collection('memo').remove(where, { multi: true}, function(err, removed) {
+        db.collection('card').remove(where, { multi: true}, function(err, removed) {
  
             if(err) throw err;
  
