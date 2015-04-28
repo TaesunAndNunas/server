@@ -70,7 +70,7 @@ exports.create = function(req, res, form){
             resultPaths.push(files[i][1].path);
         }
         for(var i in fields){
-            if(fields[i][0] == "type") card.t = fields[i][1];
+            if(fields[i][0] == "type") card.type = fields[i][1];
             else if(fields[i][0] == "date") card.date = fields[i][1];
         }
 
@@ -242,7 +242,7 @@ function _insertMemo(body, callback) { 
     
  
  
-        db.collection('memo').insert(memo , function(err, inserted){
+        db.collection('card').insert(memo , function(err, inserted){
             if (err) throw err;
  
             console.dir("successfully inserted: " + JSON.stringify(inserted));

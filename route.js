@@ -5,7 +5,7 @@ var url = require('url');  
 
 exports.route = (function() {  
     var handlers = {};  
-    handlers['/memo'] = { 
+    handlers['/cardList'] = { 
         POST: memoHandler.create,
          GET: memoHandler.read,
         PUT: memoHandler.update,

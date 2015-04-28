@@ -12,7 +12,7 @@ var formidable = require('formidable')
 function onRequest(req, res){
 	var body = '';
 
-	if (req.url == '/memo' && req.method.toUpperCase() == 'POST') {
+	if (req.url == '/cardList' && req.method.toUpperCase() == 'POST') {
    		 var form = new formidable.IncomingForm();
    		 route.route(req, res, form);
 
